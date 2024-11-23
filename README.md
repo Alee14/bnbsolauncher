@@ -1,3 +1,14 @@
+> [!WARNING]  
+> FreeSO is shutting down its servers on **midnight UTC of the 8th of December (9th December 00:00 UTC)**. The launcher's installation features will no longer function after this date.
+>
+> Please read this blog post for more information: https://freeso.org/freeso-sunset/
+>
+> To uninstall the launcher and the software it installed, follow these steps: https://github.com/ItsSim/fsolauncher/wiki/Uninstalling-the-launcher-and-or-installed-software
+>
+> An archive client is expected to become available soon, allowing players to visit Sunrise Crater offline. Stay tuned to FreeSO.org for updates.
+>
+> Thank you for playing FreeSO.
+
 [![Build Status](https://github.com/ItsSim/fsolauncher/actions/workflows/electron_ci.yml/badge.svg)](https://github.com/ItsSim/fsolauncher/actions/workflows/electron_ci.yml)
 
 # FreeSO Launcher
