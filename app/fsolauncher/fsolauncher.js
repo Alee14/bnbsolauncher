@@ -56,7 +56,7 @@ class FSOLauncher {
       this.window.on( 'minimize', () => {
         if ( ! this.minimizeReminder ) {
           Modal.sendNotification(
-            'FreeSO Launcher',
+            'bnbSO Launcher',
             locale.current.MINIMIZE_REMINDER,
             null, null, this.isDarkMode()
           );

@@ -2,7 +2,7 @@ const download = require( '../download' );
 const { strFormat, loadDependency } = require( '../utils' );
 /** @type {import('sudo-prompt')} */
 const sudo = loadDependency( 'sudo-prompt' );
-const { resourceCentral, temp, isArch } = require( '../../constants' );
+const { resourceCentral, temp, isArch, isDebian, isFedora } = require( '../../constants' );
 const { locale } = require( '../locale' );
 
 /**
@@ -52,7 +52,9 @@ class MonoInstaller {
       } else {
         if ( isArch ) {
           await this.pacmanInstall();
-        } else {
+        } else if ( isFedora ) {
+          await this.dnfInstall();
+        } else if ( isDebian ) {
           await this.aptInstall();
         }
       }
@@ -78,6 +80,23 @@ class MonoInstaller {
       } );
     } );
   }
+
+  dnfInstall() {
+    this.createProgressItem( locale.current.INS_MONO_DESCR_LONG, 100 );
+    return new Promise( ( resolve, reject ) => {
+      const command = 'dnf install -y mono-complete';
+      sudo.exec( command, ( error, stdout, stderr ) => {
+        if ( error ) {
+          console.error( 'error trying to install mono-complete on fedora', error );
+          return reject( error );
+        }
+        console.info( stdout );
+        console.error( stderr );
+        resolve();
+      } );
+    } );
+  }
+
 
   pacmanInstall() {
     this.createProgressItem( locale.current.INS_MONO_DESCR_LONG, 100 );

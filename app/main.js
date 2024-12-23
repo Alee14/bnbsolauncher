@@ -45,7 +45,7 @@ const oslocale = require( 'os-locale' ),
 
 const FSOLauncher = require( './fsolauncher/fsolauncher' );
 
-process.title = 'FreeSO Launcher';
+process.title = 'bnbSO Launcher';
 
 // Initialize willQuit with false
 // Once changed to true, next time the app is closed, it won't
@@ -175,7 +175,7 @@ async function createWindow() {
   options.show = false;
   options.frame = false;
   options.resizable = false;
-  options.title = 'FreeSO Launcher ' + version;
+  options.title = 'bnbSO Launcher ' + version;
   options.webPreferences = {
     nodeIntegration: false,
     contextIsolation: true,
@@ -211,7 +211,7 @@ async function createWindow() {
     Menu.setApplicationMenu( Menu.buildFromTemplate( darwinAppMenu( app.getName(), launcher ) ) );
   }
 
-  tray.setToolTip( `FreeSO Launcher ${version}` );
+  tray.setToolTip( `bnbSO Launcher ${version}` );
   tray.setContextMenu( Menu.buildFromTemplate( [
     {
       label: locale.current.TRAY_LABEL_1,

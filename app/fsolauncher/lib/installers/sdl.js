@@ -2,7 +2,7 @@ const download = require( '../download' );
 const { strFormat, loadDependency } = require( '../utils' );
 /** @type {import('sudo-prompt')} */
 const sudo = loadDependency( 'sudo-prompt' );
-const { resourceCentral, temp, isArch } = require( '../../constants' );
+const { resourceCentral, temp, isArch, isFedora } = require( '../../constants' );
 const { locale } = require( '../locale' );
 
 /**
@@ -62,12 +62,18 @@ class SDLInstaller {
   linuxInstall() {
     this.createProgressItem( locale.current.INS_SDL_DESCR_LONG, 100 );
     return new Promise( ( resolve, reject ) => {
-      // SDL2 installation command for Debian-based systems
-      const command = isArch ? 'pacman -Syu --noconfirm sdl2' : 'apt-get update && apt-get install -y libsdl2-2.0-0';
+      let command;
+      if ( isArch ) {
+        command = 'pacman -Syu --noconfirm sdl2';
+      } else if ( isFedora ) {
+        command = 'dnf install -y SDL2';
+      } else {
+        command = 'apt-get update && apt-get install -y libsdl2-2.0-0';
+      }
 
       sudo.exec( command, ( error, stdout, stderr ) => {
         if ( error ) {
-          console.error( 'error trying to install sdl2 on', isArch ? 'arch' : 'debian', error );
+          console.error( 'error trying to install sdl2 on', isArch ? 'arch' : isFedora ? 'fedora' : 'debian', error );
           return reject( error );
         }
         console.log( `stdout: ${stdout}` );
