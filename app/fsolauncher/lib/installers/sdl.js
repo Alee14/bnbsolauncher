@@ -4,6 +4,7 @@ const { strFormat, loadDependency } = require( '../utils' );
 const sudo = loadDependency( 'sudo-prompt' );
 const { resourceCentral, temp, isArch, isFedora } = require( '../../constants' );
 const { locale } = require( '../locale' );
+const fs = require( 'fs' );
 
 /**
  * Installs SDL on macOS systems.
@@ -62,6 +63,13 @@ class SDLInstaller {
   linuxInstall() {
     this.createProgressItem( locale.current.INS_SDL_DESCR_LONG, 100 );
     return new Promise( ( resolve, reject ) => {
+      const sdlPath = '/usr/lib64/libSDL2-2.0.so.0'; // Example path to check
+
+      if ( fs.existsSync( sdlPath ) ) {
+        console.log( 'SDL2 is already installed in the directory.' );
+        return resolve();
+      }
+
       let command;
       if ( isArch ) {
         command = 'pacman -Syu --noconfirm sdl2';

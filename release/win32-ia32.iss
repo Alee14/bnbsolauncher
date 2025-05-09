@@ -3,7 +3,7 @@
 
 #define MyAppName "FreeSO Launcher"
 ; App Version should not be modified manually (npm build script does it).
-#define MyAppVersion "0.0.0" 
+#define MyAppVersion "1.12.2" 
 #define MyAppPublisher "FreeSO.org"
 #define MyAppURL "https://freeso.org"
 #define MyAppExeName "fsolauncher.exe"
